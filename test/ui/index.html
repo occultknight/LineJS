@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--<script type="text/javascript" src="../../src/line.js"></script>-->
+    <script type="text/javascript" src="../../build/line.js"></script>
+</head>
+<body>
+<div line-view="MyInlineView">
+    <h2>{#title}</h2>
+
+    <div line-type="line:List" items='{#items}'>
+        <fieldset style="width:150px">
+            <input type="text" value="{firstName}"/>
+            <input type="text" value="{lastName}"/>
+            <label>Male</label>
+            <input type="checkbox" checked="{male}">
+
+            <p>{fullName,converter=toUpper}</p>
+            <button events='{"click":"{#showName}"}'>Show!!</button>
+            <button events='{"click":"{hello}"}'>Hello!!</button>
+        </fieldset>
+    </div>
+</div>
+<script type="text/javascript">
+    line.load('./app');
+</script>
+</body>
+</html>

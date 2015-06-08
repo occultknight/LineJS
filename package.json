@@ -1,0 +1,36 @@
+{
+  "name": "linejs",
+  "version": "0.1.0",
+  "description": "LineJS is a well-structured, layered HTML5 and javascript framework for both client and server.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "qunit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/occultknight/linejs.git"
+  },
+  "keywords": [
+    "Javascript",
+    "OOP",
+    "Runtime",
+    "Framework"
+  ],
+  "author": "occultknight",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/occultknight/linejs/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib": "~0.7.0"
+  },
+  "dependencies": {
+    "formidable": "^1.0.15",
+    "mysql": "^2.5.0",
+    "websocket": "^1.0.8"
+  }
+}
