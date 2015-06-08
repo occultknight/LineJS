@@ -16,7 +16,11 @@ and native Javascript objects.
 
 #### each 
 `line.each(target, iterator, [context])`
-> Iterate over the **target** array/object and execute the **iterator** function.
+> Iterate over the **target** array/object and execute the **iterator** function. Return line.BREAK to end the iteration.
+
+#### index
+`line.index(target, item, from, reverse)`
+> Find the index of **item** in the **target**.
 
 #### clone
 `line.clone(target)`
@@ -70,8 +74,12 @@ and native Javascript objects.
 `line.invoke(target, path, args)`
 > Invoke the method of **target** according to the **path**.
 
+#### noop
+`line.noop()`
+> Empty function which may be useful for some callbacks.
+
 ### Module system
-LineJS implemented a module system which is very useful in complicated projects.
+LineJS implemented a module system which is useful in complicated projects.
 
 #### declare a module
 
