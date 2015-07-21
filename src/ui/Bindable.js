@@ -72,6 +72,7 @@ line.module([
                 this._source = settings.source;
                 this._target = target;
                 this._targetPath = targetPath;
+                this._executing = false;
 
                 if (line.is(converter, 'string')) {
                     converter = owner[converter];
@@ -92,7 +93,11 @@ line.module([
 
                 if (direction === 'twoway' || direction === 'inverse') {
                     target.watch(targetPath, function (value) {
-                        line.path(this._ownerBinding ? owner : this.get('source'), this.get('sourcePath'), value);
+                        if (!this._executing) {
+                            this._executing = true;
+                            line.path(this._ownerBinding ? owner : this.get('source'), this.get('sourcePath'), value);
+                            this._executing = false;
+                        }
                     }, this);
                 }
             },
@@ -117,17 +122,25 @@ line.module([
 
                 if (converter) {
                     handler = function (value) {
-                        target.set(targetPath, converter.convert.call(owner, line.is(value, 'function') ? value.bind(owner) : value));
+                        if (!this._executing) {
+                            this._executing = true;
+                            target.set(targetPath, converter.convert.call(owner, line.is(value, 'function') ? value.bind(owner) : value));
+                            this._executing = false;
+                        }
                     };
                 }
                 else {
                     handler = function (value) {
-                        target.set(targetPath, line.is(value, 'function') ? value.bind(owner) : value);
+                        if (!this._executing) {
+                            this._executing = true;
+                            target.set(targetPath, line.is(value, 'function') ? value.bind(owner) : value);
+                            this._executing = false;
+                        }
                     };
                 }
 
                 if (line.can(source, 'watch')) {
-                    source.watch(sourcePath, handler);
+                    source.watch(sourcePath, handler, this);
                     this._watcher = {
                         source: source,
                         path: sourcePath,
@@ -135,7 +148,7 @@ line.module([
                     };
                 }
 
-                handler(line.path(source, sourcePath));
+                handler.call(this, line.path(source, sourcePath));
             }
         }
     });
