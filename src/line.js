@@ -1404,13 +1404,12 @@ line = {
                 deps = arg0;
                 factory = function () {
                     var result = {};
-                    line.each(arguments, function (mod) {
+                    line.each(arguments, function (mod, index) {
                         if (mod.__name__) {
                             result[mod.__name__] = mod;
                         }
-                        else {
-                            line.extend(result, mod);
-                        }
+
+                        result[index] = mod;
                     });
 
                     return result;
