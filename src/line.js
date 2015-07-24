@@ -453,8 +453,9 @@ line = {
 (function (line) {
 
     var MEMBER_PREFIX = '@',
-        id = 1,
-        GLOBAL = line.GLOBAL;
+        GLOBAL = line.GLOBAL,
+        slice = Array.prototype.slice,
+        id = 1;
 
     /**
      * Define an event for target
@@ -1007,7 +1008,7 @@ line = {
         var isPartial = meta.partial || false;
         var isAbstract = meta.abstract || false;
         var isFinal = meta.final || false;
-        var mixins = meta.mixins || [];
+        var mixins = slice.call(meta.mixins || []);
         var statics = meta.statics || {};
         var events = meta.events || [];
         var props = meta.properties || {};
