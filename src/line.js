@@ -1403,7 +1403,7 @@ line = {
             else if (line.is(arg0, 'array')) {
                 deps = arg0;
                 factory = function () {
-                    var result = {};
+                    var result = {length: arguments.length};
                     line.each(arguments, function (mod, index) {
                         if (mod.__name__) {
                             result[mod.__name__] = mod;
