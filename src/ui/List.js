@@ -4,6 +4,7 @@ line.module([
 ], function (DOMContainer, View) {
 
     return line.define('List', DOMContainer, {
+        events: ['add', 'remove', 'replace'],
         alias: 'line:List',
         properties: {
             template: {
@@ -46,6 +47,7 @@ line.module([
                 var template = this._template;
                 var items = this._items;
                 line.each(this.get('children').toArray(), function (c) {
+                    this.fire('remove', c);
                     c.destroy();
                 });
 
@@ -54,6 +56,7 @@ line.module([
                         var comp = View.create(template);
                         comp.set('model', item);
                         comp.attach(this);
+                        this.fire('add', comp);
                     }, this);
                 }
             },
@@ -66,12 +69,14 @@ line.module([
                         var comp = View.create(template);
                         comp.set('model', item);
                         comp.attach(this, index);
+                        this.fire('add', comp);
                     }, this);
                 }
                 else if (action === 'remove') {
                     line.each(event.items, function (item) {
                         line.each(this.get('children').toArray(), function (comp) {
                             if (comp.get('model') === item) {
+                                this.fire('remove', comp);
                                 comp.detach();
                             }
                         }, this);
@@ -84,6 +89,7 @@ line.module([
                     line.each(this.get('children').toArray(), function (comp) {
                         if (comp.get('model') === oldItem) {
                             comp.set('model', newItem);
+                            this.fire('replace', comp);
                         }
                     }, this);
                 }
