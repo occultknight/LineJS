@@ -62,7 +62,7 @@ line.module([
                         }
                         else if (line.is(content, 'object')) {
                             if (content.$binding) {
-                                content.converter = function (value) {
+                                content.converter = content.converter || function (value) {
                                     if (line.is(value, 'array')) {
                                         var result = [];
                                         line.each(value, function (v) {
