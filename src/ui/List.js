@@ -49,7 +49,7 @@ line.module([
                 line.each(this.get('children').toArray(), function (c) {
                     this.fire('remove', c);
                     c.destroy();
-                });
+                }, this);
 
                 if (template && items) {
                     line.each(items, function (item) {
