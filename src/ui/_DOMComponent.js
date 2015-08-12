@@ -206,7 +206,6 @@ line.module([
 
                     if (tag === 'input' || tag === 'textarea' || tag === 'select') {
                         this.on('input', function (e) {
-                            console.log(e);
                             this.notify('value');
                         }.bind(this));
 

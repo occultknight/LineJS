@@ -63,7 +63,7 @@ line.module([
             _onItemsChange: function (event) {
                 var template = this._template;
                 var action = event.action;
-                var index = event.index || -1;
+                var index = event.index;
                 if (action === 'add') {
                     line.each(event.items, function (item) {
                         var comp = View.create(template);
